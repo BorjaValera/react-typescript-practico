@@ -7,9 +7,13 @@ import noticias from "./data/noticias.json";
 import { Noticia } from "./components/Noticia";
 import { NoticiaReducida } from "./components/Noticia";
 import { NoticiaFull } from "./components/Noticia";
+import { Contador } from "./components/Contador";
+import { Reloj } from "./components/Reloj";
+import { FormularioContacto } from "./components/FormularioContacto";
 
 function App() {
   const [count, setCount] = useState(0);
+  const [visible, setVisible] = useState(true);
 
   return (
     <>
@@ -146,6 +150,27 @@ function App() {
               return <NoticiaReducida key={noticia.id} noticia={noticia} />;
           }
         })}
+      </div>
+      <section id="spacer"></section>
+
+      <div>
+        <h1>useState</h1>
+        <Contador />
+      </div>
+      <section id="spacer"></section>
+
+      <div>
+        <h1>Reloj con useEffect</h1>
+        <button type="button" onClick={() => setVisible((v) => !v)}>
+          {visible ? "Ocultar" : "Mostrar"} reloj
+        </button>
+        {visible ? <Reloj /> : <p>Reloj desmontado</p>}
+      </div>
+      <section id="spacer"></section>
+
+      <div>
+        <h1>Formulario</h1>
+        <FormularioContacto />
       </div>
       <section id="spacer"></section>
     </>
