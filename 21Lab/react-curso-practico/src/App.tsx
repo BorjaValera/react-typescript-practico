@@ -10,10 +10,21 @@ import { NoticiaFull } from "./components/Noticia";
 import { Contador } from "./components/Contador";
 import { Reloj } from "./components/Reloj";
 import { FormularioContacto } from "./components/FormularioContacto";
+import { LayoutIntermedio } from "./components/LayoutIntermedio";
+import { LangProvider } from "./context/LangContext";
+import { Layout } from "./components/Layout";
+import { ThemeProvider } from "./context/ThemeContext";
+import { PanelTema } from "./components/PanelTema";
+import { Boton } from "./components/Boton";
+import { withHover } from "./hoc/withHover";
+import { ContadorReducer } from "./components/ContadorReducer";
 
 function App() {
   const [count, setCount] = useState(0);
   const [visible, setVisible] = useState(true);
+  const [total, setTotal] = useState(0);
+  const incrementar = () => setTotal((t) => t + 1);
+  const BotonConHover = withHover(Boton);
 
   return (
     <>
@@ -171,6 +182,41 @@ function App() {
       <div>
         <h1>Formulario</h1>
         <FormularioContacto />
+      </div>
+      <section id="spacer"></section>
+
+      <div style={{ padding: "1rem" }}>
+        <h1>Prop drilling</h1>
+        <p>Total (App): {total}</p>
+        <LayoutIntermedio mensaje={`Clicks: ${total}`} onAccion={incrementar} />
+      </div>
+      <section id="spacer"></section>
+
+      <LangProvider>
+        <Layout>
+          <p>Contenido principal de la página.</p>
+        </Layout>
+      </LangProvider>
+      <section id="spacer"></section>
+
+      <ThemeProvider>
+        <h1 style={{ padding: "1rem 1rem 0" }}>Tema con Context</h1>
+        <PanelTema />
+      </ThemeProvider>
+      <section id="spacer"></section>
+
+      <div style={{ padding: "1rem", display: "flex", gap: "1rem" }}>
+        <Boton onClick={() => alert("Botón normal")}>Normal</Boton>
+
+        <BotonConHover onClick={() => alert("Botón con hover")}>
+          Con hover
+        </BotonConHover>
+      </div>
+      <section id="spacer"></section>
+
+      <div style={{ padding: "1rem" }}>
+        <h1>useReducer</h1>
+        <ContadorReducer />
       </div>
       <section id="spacer"></section>
     </>

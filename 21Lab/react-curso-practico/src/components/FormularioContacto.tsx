@@ -61,6 +61,22 @@ export function FormularioContacto() {
       <button type="submit" disabled={!emailOk}>
         Enviar
       </button>
+      {enviado && (
+        <div
+          style={{ marginTop: "1rem", padding: "1rem", background: "#f0f0f0" }}
+        >
+          <h3>Resumen enviado</h3>
+          <p>
+            <strong>Nombre:</strong> {nombre}
+          </p>
+          <p>
+            <strong>Email:</strong> {email}
+          </p>
+          <p>
+            <strong>Mensaje:</strong> {mensaje}
+          </p>
+        </div>
+      )}
       {resumen && (
         <div
           style={{ marginTop: "1rem", padding: "1rem", background: "#f0f0f0" }}
